@@ -304,6 +304,38 @@ docker compose exec -T mongodb mongodump -d osl --archive > osl-backup.archive
 bash doc/update-mongo7.sh
 ```
 
+## 🤖 MongoDB MCP Server for GitHub Custom Agents
+
+This repository includes a [MongoDB MCP (Model Context Protocol) server](https://github.com/mongodb-js/mongodb-mcp-server) configuration that enables GitHub Custom Agents to interact with the application's MongoDB database.
+
+The MCP server configuration is available in `.github/mcp.json` and connects to the same MongoDB instance used by the application (`mongodb://mongodb:27017/osl`).
+
+### Features
+
+GitHub Custom Agents can use this MCP server to:
+
+- **Query and analyze data**: Run find and aggregate queries on collections
+- **Inspect database structure**: List databases, collections, and indexes
+- **Analyze schemas**: Understand collection schemas and data patterns
+- **Get statistics**: Retrieve database and collection statistics
+
+### Security
+
+The MCP server is configured with `--readOnly` flag by default to ensure safe, read-only access to the database. This allows AI agents to analyze and understand the data without risk of accidental modifications.
+
+To enable write operations, remove the `--readOnly` flag from the configuration in `.github/agents/mongodb-mcp.agent.md`.
+
+### Usage
+
+Once a GitHub Custom Agent has access to the MongoDB MCP server, you can interact with it naturally:
+
+- "Show me all active shopping lists"
+- "What are the most common items across all lists?"
+- "Describe the schema of the items collection"
+- "Show database statistics"
+
+For more details, see [.github/agents/mongodb-mcp.agent.md](.github/agents/mongodb-mcp.agent.md).
+
 ## 👷 Developer installation
 
 > 🐋 This method also uses Docker, but with the local source files mounted
