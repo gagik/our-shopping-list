@@ -9,7 +9,8 @@ const ItemSchema = new mongoose.Schema({
   },
   listId: {
     type: String,
-    ref: 'List'
+    ref: 'List',
+    index: true
   },
   name: {
     type: String,
@@ -28,7 +29,8 @@ const ItemSchema = new mongoose.Schema({
   },
   checked: {
     type: Boolean,
-    default: false
+    default: false,
+    index: true
   },
   lastCheckedAt: {
     type: Date,

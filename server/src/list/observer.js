@@ -8,8 +8,13 @@ bus.on('model-update', function (doc) {
     ListModel
       .findById(doc.listId)
       .then((list) => {
-        list.markModified('items');
-        list.save();
+        if (list) {
+          list.markModified('items');
+          list.save();
+        }
+      })
+      .catch((err) => {
+        console.error('Error updating list on item update:', err);
       });
   }
 });
@@ -19,8 +24,13 @@ bus.on('model-delete', function (doc) {
     ListModel
       .findById(doc.listId)
       .then((list) => {
-        list.markModified('items');
-        list.save();
+        if (list) {
+          list.markModified('items');
+          list.save();
+        }
+      })
+      .catch((err) => {
+        console.error('Error updating list on item delete:', err);
       });
   }
 });
