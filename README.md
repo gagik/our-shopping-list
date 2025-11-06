@@ -308,7 +308,7 @@ bash doc/update-mongo7.sh
 
 This repository includes a [MongoDB MCP (Model Context Protocol) server](https://github.com/mongodb-js/mongodb-mcp-server) configuration that enables GitHub Custom Agents to interact with the application's MongoDB database.
 
-The MCP server is pre-configured in `.github/agents/mongodb-mcp.agent.md` and connects to the same MongoDB instance used by the application (`mongodb://mongodb:27017/osl`).
+The MCP server configuration is available in `.github/mcp.json` and connects to the same MongoDB instance used by the application (`mongodb://mongodb:27017/osl`).
 
 ### Features
 

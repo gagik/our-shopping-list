@@ -8,6 +8,8 @@ The MongoDB MCP server allows AI agents to interact with the MongoDB database us
 
 ## Configuration
 
+The MCP server configuration is defined in `.github/mcp.json`:
+
 ```json
 {
   "mcpServers": {
