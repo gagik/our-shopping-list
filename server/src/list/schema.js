@@ -45,4 +45,7 @@ ListSchema.pre('save', function() {
   this.set('lastModificationDate', undefined, { strict: false });
 });
 
+// Index for efficient queries by boardId (used in board.populate('lists'))
+ListSchema.index({ boardId: 1 });
+
 module.exports = ListSchema;

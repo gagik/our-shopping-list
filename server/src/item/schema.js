@@ -63,4 +63,7 @@ ItemSchema.pre('save', function() {
   }
 });
 
+// Index for efficient queries by listId (used in /lists/:listId/items endpoint)
+ItemSchema.index({ listId: 1 });
+
 module.exports = ItemSchema;
