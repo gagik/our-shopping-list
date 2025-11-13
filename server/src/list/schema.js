@@ -13,7 +13,8 @@ const ListSchema = new mongoose.Schema({
   },
   boardId: {
     type: String,
-    ref: 'Board'
+    ref: 'Board',
+    index: true
   },
 }, {
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },

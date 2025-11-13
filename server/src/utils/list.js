@@ -10,21 +10,20 @@ module.exports = {
    */
   async moveToBoard(listIds, boardSlug) {
     if (listIds === '*') {
-      listIds = [];
-      for await (const list of ListModel.find()) {
-        listIds.push(list._id);
-      }
+      // Use projection to only get _id field to reduce memory usage
+      listIds = (await ListModel.find({}, '_id').lean().exec())
+        .map(list => list._id);
     }
     if (!boardSlug) {
       throw new Error('Missing board slug.');
     }
 
-    const board = await BoardModel.findOne({slug: boardSlug});
+    const board = await BoardModel.findOne({slug: boardSlug}).lean().exec();
     if (!board) {
       throw new Error('Invalid board slug.');
     }
 
-    const targeListIds = (await ListModel.find({_id: {$in: listIds}}))
+    const targeListIds = (await ListModel.find({_id: {$in: listIds}}, '_id').lean().exec())
       .map((l) => l._id);
 
     return ListModel.updateMany(

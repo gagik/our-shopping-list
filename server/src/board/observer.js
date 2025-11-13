@@ -8,11 +8,16 @@ bus.on('model-update', function (doc) {
     BoardModel
       .findById(doc.boardId)
       .then((board) => {
-        board.markModified('lists');
-        board.save({
-          /** @see https://github.com/blakehaswell/mongoose-unique-validator/issues/88#issuecomment-1063368054 */
-          validateModifiedOnly: true,
-        });
+        if (board) {
+          board.markModified('lists');
+          board.save({
+            /** @see https://github.com/blakehaswell/mongoose-unique-validator/issues/88#issuecomment-1063368054 */
+            validateModifiedOnly: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error('Error updating board on list update:', err);
       });
   }
 });
@@ -22,11 +27,16 @@ bus.on('model-delete', function (doc) {
     BoardModel
       .findById(doc.boardId)
       .then((board) => {
-        board.markModified('lists');
-        board.save({
-          /** @see https://github.com/blakehaswell/mongoose-unique-validator/issues/88#issuecomment-1063368054 */
-          validateModifiedOnly: true,
-        });
+        if (board) {
+          board.markModified('lists');
+          board.save({
+            /** @see https://github.com/blakehaswell/mongoose-unique-validator/issues/88#issuecomment-1063368054 */
+            validateModifiedOnly: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error('Error updating board on list delete:', err);
       });
   }
 });
